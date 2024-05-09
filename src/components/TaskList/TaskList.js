@@ -6,12 +6,12 @@ import FindTaskForm from '../FindTaskForm/FindTaskForm';
 
 function TaskList() {
   const [items, setItems] = useState([
-    { key: "1", txt: "Task 1", priority: 1, deadline: "15.03.24", checked: false},
-    { key: "2", txt: "Task 2", priority: 1, deadline: "01.05.24" , checked: false},
-    { key: "3", txt: "Task 3", priority: 3, deadline: "25.06.24" , checked: false},
-    { key: "4", txt: "Task 4", priority: 2, deadline: "22.03.24" , checked: false},
-    { key: "5", txt: "Task 5", priority: 1, deadline: "21.06.24" , checked: false},
-    { key: "6", txt: "Task 6", priority: 3, deadline: "23.03.24" , checked: false}
+    { key: "1", txt: "Task 1", priority: 1, deadline: "15.03.24", checked: false },
+    { key: "2", txt: "Task 2", priority: 1, deadline: "01.05.24", checked: false },
+    { key: "3", txt: "Task 3", priority: 3, deadline: "25.06.24", checked: false },
+    { key: "4", txt: "Task 4", priority: 2, deadline: "22.03.24", checked: false },
+    { key: "5", txt: "Task 5", priority: 1, deadline: "21.06.24", checked: false },
+    { key: "6", txt: "Task 6", priority: 3, deadline: "23.03.24", checked: false }
   ]);
   const [filtrPriority, setFiltrPriority] = useState(0); // значение параметра фильтра
   const [findValue, setFindValue] = useState("");  // значение поискового поля
@@ -30,6 +30,21 @@ function TaskList() {
     });
   };
 
+  useEffect(() => {
+
+    const arr = [...items];
+    if (removeAndDropKeys.dropKey > 0 && removeAndDropKeys.removeKey > 0) {
+      const removeIndex = arr.findIndex(item => item.key === removeAndDropKeys.removeKey);
+      const dropIndex = arr.findIndex(item => item.key === removeAndDropKeys.dropKey);
+      const temp = arr[removeIndex];
+      arr[removeIndex] = arr[dropIndex];
+      arr[dropIndex] = temp;
+      setItems(arr);
+      updateDropKey(0)
+    } else {
+      console.log("пустой стейт")
+    }
+  }, [removeAndDropKeys])
   function swapElementsInArray() {
     const arr = items;
     if (removeAndDropKeys.dropKey > 0 && removeAndDropKeys.removeKey > 0) {
@@ -47,7 +62,7 @@ function TaskList() {
 
   const renderItemsList = (arr) => {
     const findResult = arr.filter((el) => el.txt.includes(findValue))
-    // const afterSwap = swapElementsInArray(findResult);
+
     return findResult.map(item => (
       <TaskItem
         itemKey={item.key}
@@ -129,13 +144,13 @@ function TaskList() {
     const selectedPriority = parseInt(event.target.value);
     setFiltrPriority(selectedPriority);
   }
-  const handleCheck = (key,checked) => {
-    setItems(prevItems => 
-      prevItems.map(item => 
+  const handleCheck = (key, checked) => {
+    setItems(prevItems =>
+      prevItems.map(item =>
         item.key === key ? { ...item, checked: !item.checked } : item
       ));
     setCheckedItems(prevCheckedItems => [...prevCheckedItems, key]);
-    }
+  }
 
 
 
