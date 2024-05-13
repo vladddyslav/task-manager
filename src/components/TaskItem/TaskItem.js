@@ -52,7 +52,7 @@ function TaskItem({ itemKey, txt, priority, deleteTask, increasePriority, downPr
 
   return (
     <div
-      className="taskItem"
+      className="task-item"
       style={{ backgroundColor }}
       draggable={true}
       onDragStart={(e) => dragStartHandler(e, txt, itemKey)}

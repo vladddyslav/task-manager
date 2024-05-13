@@ -8,7 +8,7 @@ import tasksData from '../tasksData';
 function TaskList() {
 
   const [tasks, setTasks] = useState(tasksData);
-  const [filtrPriority, setFiltrPriority] = useState(0);
+  const [filterPriority, setFilterPriority] = useState(0);
   const [searchTerm, setSearchTerm] = useState(""); 
   const [dragAndDropKeys, setDragAndDropKeys] = useState({ removeKey: 0, dropKey: 0 }); 
   const [selectedTasks, setSelectedTasks] = useState([])
@@ -138,7 +138,7 @@ function TaskList() {
   }
   const handlePriorityFilter = (event) => {
     const selectedPriority = parseInt(event.target.value);
-    setFiltrPriority(selectedPriority);
+    setFilterPriority(selectedPriority);
   }
   const handleCheck = (key, checked) => {
     setTasks(prevItems =>
@@ -169,7 +169,7 @@ function TaskList() {
           style={{ display: selectedTasks.length > 0 ? 'inline-block' : 'none' }}
 
         >Del checked Tasks</button>
-        {filtrPriority >= 1 ? renderTaskItems (priorityFilter(filtrPriority)) : renderTaskItems (tasks)}
+        {filterPriority >= 1 ? renderTaskItems (priorityFilter(filterPriority)) : renderTaskItems (tasks)}
       </div>
       <AddTaskForm addTask={addTask} />
     </>
