@@ -2,7 +2,7 @@ import "./taskItem.css"
 import { useState } from "react";
 import React from 'react';
 
-function TaskItem({ itemKey, txt, priority, delFnc, upPriority, downPriority, deadlineValue, updateDropKey, updateRemoveKey,handleCheck,checked }) {
+function TaskItem({ itemKey, txt, priority, deleteTask, increasePriority, downPriority, deadlineValue, updateDropKey, updateRemoveKey,handleCheck,checked }) {
 
   const [isEditingDeadline, setIsEditingDeadline] = useState(false);
   const [deadline, setDeadline] = useState(deadlineValue);
@@ -62,9 +62,9 @@ function TaskItem({ itemKey, txt, priority, delFnc, upPriority, downPriority, de
       onDrop={(e) => dragDropHandler(e, itemKey)}
     >
       {txt}
-      <button onClick={delFnc}>Del</button>
+      <button onClick={deleteTask}>Del</button>
       Priority: {priority}
-      <button onClick={upPriority}>+</button>
+      <button onClick={increasePriority}>+</button>
       <button onClick={downPriority}>-</button>
 
 

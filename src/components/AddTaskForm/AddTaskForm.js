@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-function AddTaskForm({ addFnc }) {
+function AddTaskForm({ addTask }) {
   const [taskDescription, setTaskDescription] = useState('');
 
   const handleChange = (event) => {
@@ -9,13 +9,13 @@ function AddTaskForm({ addFnc }) {
 
   const handleSubmit = () => {
     if (taskDescription.trim() !== '') {
-      addFnc(taskDescription);
+      addTask(taskDescription);
       setTaskDescription('');
     }
   };
 
   return (
-    <div className="addTaskForm">
+    <div className="add-task-form">
       <input
         type="text"
         id="taskDescription"
